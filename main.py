@@ -11,16 +11,17 @@ def readGraph(fileName):
 
     return graph
 
-def writeGraph(fileName, minOstovEdges, ostovWeight):
-    if minOstovEdges is None:
-        print("Ошибка: невозможно записать дерево, так как оно не существует.")
-        return
+def writeGraph(fileName, minOstovEdges, ostovWeight ,g: Graph):
     with open(fileName, 'w') as file:
-
-        file.write("Остовное дерево минимального веса\n")
+        file.write("Adjacency List\n")
+        file.write(g.adjacencyList.__str__())
+        if minOstovEdges is None:
+            print("Ошибка: невозможно записать дерево, так как оно не существует.")
+            return
+        file.write("Minimum weight spanning tree\n")
         for w, u, v in minOstovEdges:
-            file.write(f"Ребро: {u} - {v}, вес: {w}\n")
-        file.write(f"Общий вес: {ostovWeight}\n")
+            file.write(f"Edge: {u} - {v}, weight: {w}\n")
+        file.write(f"Total weight: {ostovWeight}\n")
 
 
 def generateRandomGraph(n, m, filename):
@@ -52,7 +53,7 @@ def main():
     G = readGraph(inputFile)
     print(G)
     minOstovEdges, ostovWeight = G.prima()
-    writeGraph(outputFile, minOstovEdges, ostovWeight)
+    writeGraph(outputFile, minOstovEdges, ostovWeight, G)
 
 
 if __name__ == "__main__":
