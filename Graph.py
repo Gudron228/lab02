@@ -61,8 +61,10 @@ class Graph:
                     if neighbor not in visited:
                         heapq.heappush(minHeap, (weight, v, neighbor))
 
+
         if len(minOstovEdges) != self.n - 1:
-            raise ValueError("Граф не связан")
+            print("Граф не связан")
+            return None, None
 
         if not self.isValidTree(minOstovEdges):
             print("Ошибка при проверке дерева с ограничениями")
